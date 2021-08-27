@@ -13,27 +13,18 @@ const createStatusBtn = (index) => {
     const sts = document.createElement('button');
     sts.setAttribute('id','crebtn_' + index);
     sts.innerHTML = '作業中';
+    console.log(tasks);
     sts.addEventListener('click',() => {
         if(sts.innerHTML == '作業中'){
             sts.innerHTML = '完了';
+            tasks[index].status = sts.innerHTML;
         }else{
             sts.innerHTML = '作業中';
+            tasks[index].status = sts.innerHTML;
         }
     });
     return sts;
 }
-// const createStatusButton = () => {
-//     　const statusButton = document.createElement('button');
-//     　statusButton.textContent = '作業中';
-//     　statusButton.addEventListener('click', () => {
-//     　　if (statusButton.textContent === '作業中') {
-//     　　　statusButton.textContent = '完了';
-//     　　} else {
-//     　　　statusButton.textContent = '作業中';
-//     　　}
-//     　});
-//     　return statusButton;
-//     };
 
 
 
