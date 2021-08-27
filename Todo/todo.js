@@ -13,7 +13,6 @@ const createStatusBtn = (index) => {
     const sts = document.createElement('button');
     sts.setAttribute('id','crebtn_' + index);
     sts.innerHTML = '作業中';
-    console.log(tasks);
     sts.addEventListener('click',() => {
         if(sts.innerHTML == '作業中'){
             sts.innerHTML = '完了';
