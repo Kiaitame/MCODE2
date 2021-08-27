@@ -13,15 +13,35 @@ const createStatusBtn = (index) => {
     const sts = document.createElement('button');
     sts.setAttribute('id','crebtn_' + index);
     sts.innerHTML = '作業中';
+    sts.addEventListener('click',() => {
+        if(sts.innerHTML == '作業中'){
+            sts.innerHTML = '完了';
+        }else{
+            sts.innerHTML = '作業中';
+        }
+    });
     return sts;
 }
+// const createStatusButton = () => {
+//     　const statusButton = document.createElement('button');
+//     　statusButton.textContent = '作業中';
+//     　statusButton.addEventListener('click', () => {
+//     　　if (statusButton.textContent === '作業中') {
+//     　　　statusButton.textContent = '完了';
+//     　　} else {
+//     　　　statusButton.textContent = '作業中';
+//     　　}
+//     　});
+//     　return statusButton;
+//     };
+
 
 
 //削除ボタン生成処理
 const createRemoveBtn = (index) => {
     const rmv = document.createElement('button');
     rmv.setAttribute('id', 'rmvbtn_' + index);
-    rmv.innerHTML = '削除';
+    rmv.innerText = '削除';
     rmv.addEventListener('click',() => {
         tasks.splice(index,1);
         TodoDispay();
