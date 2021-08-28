@@ -70,7 +70,6 @@ const midcompDisplay = (a) => {
 }
 
 
-
 document.getElementById('add').addEventListener('click',() => {
 const inputTask = document.getElementById('input').value;
 const task = {
@@ -98,7 +97,6 @@ midcompDisplay('完了');
 document.getElementById('all').addEventListener('change',() => {
 allDisplay();
 });
-
 
 document.getElementById('comp').addEventListener('change',() => {
 allDisplay();
