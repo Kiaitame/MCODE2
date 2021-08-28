@@ -37,7 +37,8 @@ const createRemoveBtn = (index) => {
     rmv.innerText = '削除';
     rmv.addEventListener('click',() => {
         tasks.splice(index,1);
-        TodoDispay();
+        TodoDisplay();
+        judgeDisplay();
     });
     return rmv;
 }
@@ -69,6 +70,17 @@ const midcompDisplay = (a) => {
         }});
 }
 
+const judgeDisplay = () => {
+    if(all.checked){
+        allDisplay();
+    }else if(mid.checked){
+        allDisplay();
+        midcompDisplay('完了');
+    }else if(comp.checked){
+        allDisplay();
+        midcompDisplay('作業中');
+    }
+}
 
 document.getElementById('add').addEventListener('click',() => {
 const inputTask = document.getElementById('input').value;
@@ -78,15 +90,7 @@ const task = {
         };
 tasks.push(task);
 TodoDisplay();
-if(all.checked){
-    allDisplay();
-}else if(mid.checked){
-    allDisplay();
-    midcompDisplay('完了');
-}else if(comp.checked){
-    allDisplay();
-    midcompDisplay('作業中');
-}
+judgeDisplay();
 });
 
 document.getElementById('mid').addEventListener('change',() => {
