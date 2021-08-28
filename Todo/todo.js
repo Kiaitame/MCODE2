@@ -1,5 +1,8 @@
 'use strict';
 const tasks = [];
+const all = document.getElementById('all');
+const mid = document.getElementById('mid');
+const comp = document.getElementById('comp');
 const tbl = document.getElementById('tbl');
 const createTd = (contents) => {
     const td = document.createElement('td');
@@ -12,7 +15,7 @@ const createTd = (contents) => {
 const createStatusBtn = (index) => {
     const sts = document.createElement('button');
     sts.setAttribute('id','crebtn_' + index);
-    sts.innerHTML = '作業中';
+    sts.innerHTML = tasks[index].status;
     sts.addEventListener('click',() => {
         if(sts.innerHTML == '作業中'){
             sts.innerHTML = '完了';
@@ -39,8 +42,7 @@ const createRemoveBtn = (index) => {
     return rmv;
 }
 
-
-const TodoDispay = () => {
+const TodoDisplay = () => {
     tbl.innerHTML = '';
     tasks.forEach((value,index) => {
         const tr  = document.createElement('tr');
@@ -68,7 +70,22 @@ const task = {
         status: '作業中'
         };
 tasks.push(task);
-TodoDispay();
+TodoDisplay();
+if(all.checked){
+    allDisplay();
+}else if(mid.checked){
+    allDisplay();
+    tasks.forEach((value,index) => {
+        if(value.status == '完了'){
+            document.getElementById('tr_' + index).style.display = 'none';
+        }});
+}else if(comp.checked){
+    allDisplay();
+    tasks.forEach((value,index) => {
+        if(value.status == '作業中'){
+            document.getElementById('tr_' + index).style.display = 'none';
+        }});
+}
 });
 
 document.getElementById('mid').addEventListener('change',() => {
@@ -93,4 +110,5 @@ tasks.forEach((value,index) => {
     }
 });
 })
+
         
