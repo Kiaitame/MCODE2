@@ -62,6 +62,14 @@ const allDisplay = () => {
 });
 }
 
+const midcompDisplay = (a) => {
+    tasks.forEach((value,index) => {
+        if(value.status == a){
+            document.getElementById('tr_' + index).style.display = 'none';
+        }});
+}
+
+
 
 document.getElementById('add').addEventListener('click',() => {
 const inputTask = document.getElementById('input').value;
@@ -75,27 +83,17 @@ if(all.checked){
     allDisplay();
 }else if(mid.checked){
     allDisplay();
-    tasks.forEach((value,index) => {
-        if(value.status == '完了'){
-            document.getElementById('tr_' + index).style.display = 'none';
-        }});
+    midcompDisplay('完了');
 }else if(comp.checked){
     allDisplay();
-    tasks.forEach((value,index) => {
-        if(value.status == '作業中'){
-            document.getElementById('tr_' + index).style.display = 'none';
-        }});
+    midcompDisplay('作業中');
 }
 });
 
 document.getElementById('mid').addEventListener('change',() => {
 allDisplay();
-tasks.forEach((value,index) => {
-    if(value.status == '完了'){
-        document.getElementById('tr_' + index).style.display = 'none';
-    }
+midcompDisplay('完了');
 });
-})
 
 document.getElementById('all').addEventListener('change',() => {
 allDisplay();
@@ -104,11 +102,7 @@ allDisplay();
 
 document.getElementById('comp').addEventListener('change',() => {
 allDisplay();
-tasks.forEach((value,index) => {
-    if(value.status == '作業中'){
-        document.getElementById('tr_' + index).style.display = 'none';
-    }
+midcompDisplay('作業中');
 });
-})
 
         
