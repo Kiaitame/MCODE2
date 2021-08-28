@@ -44,6 +44,7 @@ const TodoDispay = () => {
     tbl.innerHTML = '';
     tasks.forEach((value,index) => {
         const tr  = document.createElement('tr');
+        tr.setAttribute('id','tr_' + index);
         tr.appendChild(createTd(index));
         tr.appendChild(createTd(value.comment));
         tr.appendChild(createStatusBtn(index));
@@ -51,6 +52,12 @@ const TodoDispay = () => {
         tbl.appendChild(tr);
     });
     document.getElementById('input').value = '';
+}
+
+const allDisplay = () => {
+    tasks.forEach((value,index) => {
+        document.getElementById('tr_' + index).style.display = '';
+});
 }
 
 
@@ -64,3 +71,26 @@ tasks.push(task);
 TodoDispay();
 });
 
+document.getElementById('mid').addEventListener('change',() => {
+allDisplay();
+tasks.forEach((value,index) => {
+    if(value.status == '完了'){
+        document.getElementById('tr_' + index).style.display = 'none';
+    }
+});
+})
+
+document.getElementById('all').addEventListener('change',() => {
+allDisplay();
+});
+
+
+document.getElementById('comp').addEventListener('change',() => {
+allDisplay();
+tasks.forEach((value,index) => {
+    if(value.status == '作業中'){
+        document.getElementById('tr_' + index).style.display = 'none';
+    }
+});
+})
+        
