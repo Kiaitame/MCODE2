@@ -91,7 +91,6 @@ const task = {
 tasks.push(task);
 TodoDisplay();
 judgeDisplay();
-console.log(taskList);
 });
 
 taskList.forEach((value) => {
