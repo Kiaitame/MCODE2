@@ -19,7 +19,7 @@ const createStatusBtn = (index) => {
             sts.innerHTML = '完了';
             tasks[index].status = sts.innerHTML;
             judgeDisplay();
-        } else{
+        } else {
             sts.innerHTML = '作業中';
             tasks[index].status = sts.innerHTML;
             judgeDisplay();
@@ -73,10 +73,10 @@ const midcompDisplay = (a) => {
 const judgeDisplay = () => {
     if(taskList[0].checked){
         allDisplay();
-    } else if(taskList[1].checked){
+    } else if (taskList[1].checked){
         allDisplay();
         midcompDisplay('完了');
-    } else if(taskList[2].checked){
+    } else if (taskList[2].checked){
         allDisplay();
         midcompDisplay('作業中');
     }
@@ -85,26 +85,10 @@ const judgeDisplay = () => {
 document.getElementById('add').addEventListener('click',() => {
 const inputTask = document.getElementById('input').value;
 const task = {
-        comment: inputTask,
-        status: '作業中'
-        };
+    comment: inputTask,
+    status: '作業中'
+};
 tasks.push(task);
 TodoDisplay();
 judgeDisplay();
 });
-
-document.getElementById('mid').addEventListener('change',() => {
-allDisplay();
-midcompDisplay('完了');
-});
-
-document.getElementById('all').addEventListener('change',() => {
-allDisplay();
-});
-
-document.getElementById('comp').addEventListener('change',() => {
-allDisplay();
-midcompDisplay('作業中');
-});
-
-        
