@@ -1,8 +1,6 @@
 'use strict';
 const tasks = [];
-const all = document.getElementById('all');
-const mid = document.getElementById('mid');
-const comp = document.getElementById('comp');
+const taskList = document.getElementsByName('task');
 const tbl = document.getElementById('tbl');
 const createTd = (contents) => {
     const td = document.createElement('td');
@@ -20,9 +18,11 @@ const createStatusBtn = (index) => {
         if(sts.innerHTML == '作業中'){
             sts.innerHTML = '完了';
             tasks[index].status = sts.innerHTML;
-        }else{
+            judgeDisplay();
+        } else{
             sts.innerHTML = '作業中';
             tasks[index].status = sts.innerHTML;
+            judgeDisplay();
         }
     });
     return sts;
@@ -37,7 +37,8 @@ const createRemoveBtn = (index) => {
     rmv.innerText = '削除';
     rmv.addEventListener('click',() => {
         tasks.splice(index,1);
-        TodoDispay();
+        TodoDisplay();
+        judgeDisplay();
     });
     return rmv;
 }
@@ -69,40 +70,31 @@ const midcompDisplay = (a) => {
         }});
 }
 
-
+const judgeDisplay = () => {
+    if(taskList[0].checked){
+        allDisplay();
+    } else if(taskList[1].checked){
+        allDisplay();
+        midcompDisplay('完了');
+    } else if(taskList[2].checked){
+        allDisplay();
+        midcompDisplay('作業中');
+    }
+}
 
 document.getElementById('add').addEventListener('click',() => {
 const inputTask = document.getElementById('input').value;
 const task = {
-        comment: inputTask,
-        status: '作業中'
-        };
+    comment: inputTask,
+    status: '作業中'
+};
 tasks.push(task);
 TodoDisplay();
-if(all.checked){
-    allDisplay();
-}else if(mid.checked){
-    allDisplay();
-    midcompDisplay('完了');
-}else if(comp.checked){
-    allDisplay();
-    midcompDisplay('作業中');
-}
+judgeDisplay();
 });
 
-document.getElementById('mid').addEventListener('change',() => {
-allDisplay();
-midcompDisplay('完了');
+taskList.forEach((value) => {
+    value.addEventListener('change', () => {
+        judgeDisplay();
+    });   
 });
-
-document.getElementById('all').addEventListener('change',() => {
-allDisplay();
-});
-
-
-document.getElementById('comp').addEventListener('change',() => {
-allDisplay();
-midcompDisplay('作業中');
-});
-
-        
