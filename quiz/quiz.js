@@ -8,18 +8,22 @@ const URL = 'https://opentdb.com/api.php?amount=10&type=multiple';
 let answerCount = 0;
 
 const getApidata = async (index) => {
-    const response = await fetch(URL);
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-    const quiz = new Quiz(data);
-    nextQuiz(quiz,index);
+    try{
+        const response = await fetch(URL);
+        const data = await response.json();
+        const quiz = new Quiz(data);
+        if(!quiz){
+            throw 'fetch is failed';
+        }
+        nextQuiz(quiz,index);
+    } catch(e) {
+        console.error(e); 
+    }
 }
 
 class Quiz{
     constructor(data) {
         this._results = data.results;
-        this._correctAnswernum = 0;
     }
 
     getquizCategory(index) {
@@ -40,6 +44,10 @@ class Quiz{
 
     getincorrectAnswers(index) {
         return this._results[index -1].incorrect_answers;
+    }
+
+    getresultLength(){
+        return this._results.length;
     }
 
 }
@@ -88,6 +96,7 @@ const answerDisplay = () => {
 
 
 const creBtn = (quiz,index) => {
+    const quizLength = quiz.getresultLength();
     const inCorrectA = quiz.getincorrectAnswers(index);
     const correctA = quiz.getcorrectAnswer(index);
     const formattedAnswer = [...inCorrectA,correctA]
@@ -103,8 +112,9 @@ const creBtn = (quiz,index) => {
         const element = document.createElement('tr');
         element.appendChild(btn);
         parent.appendChild(element);
+
         btn.addEventListener('click', () => {
-            if(index < 10){
+            if(index < quizLength){
                 if(btn.innerHTML === correctA){
                     answerCount++; 
                 }
@@ -115,5 +125,4 @@ const creBtn = (quiz,index) => {
                 answerDisplay();
             }
         })
-
 }}
