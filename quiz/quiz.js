@@ -12,9 +12,6 @@ const getApidata = async (index) => {
         const response = await fetch(URL);
         const data = await response.json();
         const quiz = new Quiz(data);
-        if(!quiz){
-            throw 'fetch is failed';
-        }
         nextQuiz(quiz,index);
     } catch(e) {
         console.error(e); 
